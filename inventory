@@ -1,5 +1,9 @@
 [web]
 clone1
 
-[db]
-clone2
+#[db]
+#clone2
+
+#[svr:children]
+#web
+#db

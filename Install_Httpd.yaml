@@ -1,0 +1,27 @@
+- hosts: clone1
+  become: true
+  tasks:
+    - name: Install Httpd Package
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Copying index File
+      copy:
+        #src: /home/ansible/Ansible_Lab/index.html
+        content: "Web Server Testing!!!\n"
+        dest: /var/www/html/index.html
+
+    - name: Allowing Http Traffic
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: true
+
+    - name: Starting and Enabling Httpd
+      ansible.builtin.systemd:
+        state: started
+        name: httpd
+        enabled: yes
+
