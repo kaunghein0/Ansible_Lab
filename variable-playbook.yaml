@@ -1,0 +1,32 @@
+- name: Working with variables
+  hosts: localhost
+  #connection: local
+  become: false
+  vars_files:
+    - var-port-color.yaml
+    - var-users.yaml
+
+  tasks:
+    - name: Show me fav_color value
+      debug:
+        msg: "My favorite color is {{ fav_color }}."
+
+    - name: show me fav-color value again
+      debug:
+        msg: "{{ fav_color }} is my favorite color."
+    
+    - name: show port numbers
+      debug:
+        msg: "All the ports {{ port_nums }}"
+  
+    - name: showing First Port Number
+      debug:
+        msg: "First port number is {{ port_nums[0] }}"
+
+    - name: showing both of users name
+      debug:
+        msg: "Users name are {{ users.bob.username }} and {{ users.lisa.username }}"
+
+    - name: showing both of user id
+      debug:
+        msg: "Both of user id are {{ users['bob']['uid'] }}  and {{ users['lisa']['uid'] }}"
