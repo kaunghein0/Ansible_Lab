@@ -1,0 +1,16 @@
+- name: understanding List Variable
+  hosts: localhost
+  become: false
+  connection: local
+  gather_facts: false
+  vars_files:
+    - var-lists
+  
+  tasks:
+    - name: Choosing Region
+      debug:
+        msg: "The region I stay in {{ region[1] }}"
+    
+    - name: Chosing Car
+      debug:
+        msg: "Luxury car is {{ cars[1]['name'] }} "

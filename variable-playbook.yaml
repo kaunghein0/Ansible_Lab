@@ -1,6 +1,7 @@
 - name: Working with variables
   hosts: localhost
   #connection: local
+  gather_facts: true
   become: false
   vars_files:
     - var-port-color.yaml
@@ -30,3 +31,12 @@
     - name: showing both of user id
       debug:
         msg: "Both of user id are {{ users['bob']['uid'] }}  and {{ users['lisa']['uid'] }}"
+
+    - name: Checking Distrubution
+      debug:
+        msg: "{{ ansible_distribution }}"
+
+    - name: Saving Gather Facts
+      ansible.builtin.copy:
+        content: "{{ ansible_facts | to_nice_yaml }}"
+        dest: /tmp/ansible_facts

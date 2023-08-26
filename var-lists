@@ -1,0 +1,17 @@
+region:
+  - northest
+  - southest
+  - midwest
+
+cars:
+  - name: Toyota
+    color: Black
+    price: $4K 
+
+  - name: BMW
+    color: Grey
+    price: $50K
+
+  - name: Ford-GT
+    color: Grey
+    price: $600K
