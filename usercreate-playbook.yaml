@@ -1,0 +1,25 @@
+- name: User Acc creation & COpying ssh-key file
+  hosts: node01
+  become: true
+  gather_facts: false
+  vars:
+    user: automate
+  tasks:
+    - name: User Acc Creation
+      ansible.builtin.user:
+        name: "{{ user }}" 
+        state: present
+        shell: /bin/bash
+
+    - name: Making Sudo Privilege
+      ansible.builtin.copy:
+        content: "{{ user }} ALL=(ALL)       NOPASSWD: ALL"
+        dest: "/etc/sudoers.d/{{ user }}"
+   
+    - name: Copying ssh-key to automate user
+      ansible.posix.authorized_key:
+        name: "{{ user }}" 
+        state: present
+        key: "{{ lookup('file', '/etc/ssh/ssh_host_rsa_key.pub') }}"
+
+      
