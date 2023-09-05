@@ -1,0 +1,19 @@
+- name: Allowing Ports
+  become: true
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    firewall_ports:
+      - 80
+      - 81
+      - 8080
+
+  tasks:
+    - name: allowing ports for server
+      firewalld:
+        port: "{{ item }}/tcp"
+        permanent: true
+        state: present
+        immediate: yes
+      loop: "{{ firewall_ports }}"
