@@ -1,8 +1,11 @@
 [web]
-clone1
+node01
+
+[localhost]
+localhost 
 
 #[db]
-#clone2
+#node02
 
 #[svr:children]
 #web

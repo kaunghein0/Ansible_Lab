@@ -1,4 +1,4 @@
-- hosts: clone1
+- hosts: node01
   become: true
   tasks:
     - name: Install Httpd Package
@@ -23,5 +23,5 @@
       ansible.builtin.systemd:
         state: started
         name: httpd
-        enabled: yes
+        enabled: true
 

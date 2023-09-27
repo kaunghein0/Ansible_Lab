@@ -1,0 +1,23 @@
+# "handlers" can only run when "notify" task need to be changes
+
+--- 
+- name: Simple Handler Example
+  hosts: node01
+  become: yes
+  gather_facts: no
+  tasks:
+  - name: Creating Engineers Groups
+    group:
+      name: engineers
+    notify: add elliot
+
+  - name: Another task in the play
+    debug:
+      msg: "Just Another Task"
+
+  handlers:
+    - name: add elliot
+      user:
+        name: elliot
+        groups: engineers
+        append: yes

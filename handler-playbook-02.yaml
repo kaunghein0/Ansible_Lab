@@ -1,0 +1,29 @@
+---
+- name: Simple Handler Example
+  hosts: node01
+  gather_facts: no
+  tasks: 
+    - name: run a command
+      shell: |
+        systemctl is-enabled firewalld
+      register: shell_output
+      ignore_errors: true
+
+    - name: showing Shell Output
+      debug:
+        var: shell_output
+        #msg: "{{ shell_output }}"
+      changed_when: shell_output != 0
+      notify: enable firewalld
+
+  handlers:
+    - name : enable firewalld
+      ansible.builtin.systemd:
+        state: started
+        name: firewalld
+        enabled: yes
+
+#  rescue:
+#    - name: Printing status
+#      debug:
+#        msg: "firewalld service is enabled"

@@ -11,9 +11,15 @@
 
   tasks:
     - name: allowing ports for server
-      firewalld:
+      ansible.posix.firewalld:
         port: "{{ item }}/tcp"
         permanent: true
-        state: present
-        immediate: yes
+        state: enabled
       loop: "{{ firewall_ports }}"
+    
+
+#      ansible.posix.firewalld:
+#        port: 8080/tcp
+#        permanent: yes
+#        state: enabled
+#        immediate: yes
