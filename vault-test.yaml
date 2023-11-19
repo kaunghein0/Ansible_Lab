@@ -1,0 +1,11 @@
+---
+- name: vault test
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - vault.yaml
+    - vault2.yaml
+  tasks:
+  - name: show vault data
+    debug:
+      msg: " {{ msg }} by {{ username }}"
